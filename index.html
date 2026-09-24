@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurpleTech — Electronics & Gadgets</title>
+  <meta name="description" content="Modern pastel-purple electronics and gadgets e-commerce SPA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#8A76A6; --primary-2:#A294C7; --ink:#292532;
+      --muted:#716b7c; --cream:#DCD6CD; --lav:#F3EFF9;
+      --bg:#F9F8FC; --white:#fff; --line:rgba(138,118,166,.16);
+      --shadow:0 18px 50px rgba(80,61,107,.10);
+      --shadow-sm:0 10px 30px rgba(80,61,107,.08);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#F9F8FC,#F3F0F8);color:var(--ink);font-family:Inter,system-ui,sans-serif}
+    h1,h2,h3,h4,h5,h6,.brand{font-family:Poppins,Inter,sans-serif}
+    a{text-decoration:none;color:inherit;cursor:pointer}
+    .text-purple{color:var(--primary)!important}
+    .section-pad{padding:88px 0}
+    .glass{background:rgba(255,255,255,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.85);box-shadow:var(--shadow-sm)}
+    .navbar{position:sticky;top:0;z-index:1030;background:rgba(249,248,252,.80)!important;backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+    .brand{font-weight:800;letter-spacing:-.5px}
+    .brand-mark{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:inline-grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(138,118,166,.28)}
+    .nav-link{font-weight:600;color:#625c6c!important;font-size:.92rem;cursor:pointer}
+    .nav-link:hover,.nav-link.active{color:var(--primary)!important}
+    .search-wrap{position:relative;min-width:250px}
+    .search-wrap i{position:absolute;left:14px;top:11px;color:#958da1}
+    .search-wrap input{padding-left:40px;border:1px solid var(--line);background:#fff;border-radius:14px;height:42px}
+    .btn-purple{background:var(--primary);color:#fff;border:0;border-radius:14px;padding:.72rem 1.05rem;font-weight:700;box-shadow:0 9px 22px rgba(138,118,166,.22)}
+    .btn-purple:hover{background:#776394;color:#fff;transform:translateY(-1px)}
+    .btn-soft{background:var(--lav);color:var(--primary);border:1px solid var(--line);border-radius:14px;padding:.72rem 1.05rem;font-weight:700}
+    .btn-soft:hover{background:#e9e2f4;color:#6f5b8c}
+    .hero{min-height:650px;display:flex;align-items:center;position:relative;overflow:hidden}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(4px);opacity:.55;pointer-events:none}
+    .hero:before{width:430px;height:430px;background:#e9ddfa;right:-120px;top:-120px}
+    .hero:after{width:300px;height:300px;background:#e8e0d5;left:-150px;bottom:-120px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--lav);border:1px solid var(--line);color:var(--primary);padding:8px 13px;border-radius:999px;font-size:.8rem;font-weight:800}
+    .hero h1{font-size:clamp(2.6rem,6vw,5.2rem);line-height:1.03;letter-spacing:-3px;font-weight:800;margin:20px 0}
+    .hero h1 span{color:var(--primary)}
+    .hero-copy{font-size:1.08rem;line-height:1.8;color:var(--muted);max-width:600px}
+    .hero-art{position:relative;min-height:500px;display:grid;place-items:center;animation:float 5s ease-in-out infinite}
+    .hero-device{width:min(480px,88%);aspect-ratio:1/1;object-fit:cover;border-radius:38px;box-shadow:0 30px 70px rgba(67,49,90,.22);border:9px solid rgba(255,255,255,.65)}
+    .float-card{position:absolute;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);padding:15px;border-radius:18px;box-shadow:var(--shadow);border:1px solid #fff}
+    .float-one{left:2%;top:16%}.float-two{right:2%;bottom:17%}
+    .section-title{max-width:720px;margin-bottom:38px}.section-title h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1.5px}
+    .section-title p{color:var(--muted);line-height:1.8}
+    .filter-bar{padding:18px;border-radius:22px;margin-bottom:30px}
+    .filter-btn{border:1px solid var(--line);background:#fff;color:#6c6577;border-radius:999px;padding:9px 16px;font-weight:700;font-size:.88rem}
+    .filter-btn.active,.filter-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .product-card{height:100%;border-radius:22px;background:rgba(255,255,255,.86);border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow-sm);transition:.35s ease;position:relative}
+    .product-card:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(99,76,127,.18)}
+    .product-img-wrap{aspect-ratio:4/3;overflow:hidden;background:#eee;position:relative}
+    .product-img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+    .product-card:hover .product-img{transform:scale(1.07)}
+    .product-body{padding:18px}
+    .product-meta{font-size:.78rem;color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.7px}
+    .product-title{font-weight:800;font-size:1.03rem;margin:7px 0}
+    .rating{color:#d49d38;font-size:.85rem}
+    .price{font-size:1.2rem;font-weight:800}
+    .badge-cat{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);color:var(--primary);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:800;z-index:2}
+    .feature-card,.blog-card,.stat-card,.info-card{border-radius:22px;padding:26px;height:100%}
+    .feature-icon{width:48px;height:48px;border-radius:15px;background:var(--lav);display:grid;place-items:center;color:var(--primary);font-size:1.2rem;margin-bottom:16px}
+    .feature-card p,.blog-card p,.info-card p{color:var(--muted);line-height:1.7}
+    .blog-card{padding:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .blog-img{width:100%;aspect-ratio:16/9;object-fit:cover}
+    .blog-body{padding:20px}
+    .page{display:none;min-height:70vh}
+    .page.active{display:block;animation:fadeInUp .45s ease}
+    .page-hero{padding:70px 0 40px}
+    .form-control,.form-select{border:1px solid var(--line);border-radius:14px;padding:.82rem 1rem;background:#fff}
+    .form-control:focus,.form-select:focus{border-color:var(--primary-2);box-shadow:0 0 0 .2rem rgba(162,148,199,.18)}
+    .auth-card{max-width:540px;margin:60px auto;padding:34px;border-radius:26px}
+    .strength{height:7px;border-radius:99px;background:#e9e5ed;overflow:hidden}
+    .strength span{height:100%;display:block;width:0;background:var(--primary);transition:.3s}
+    .cart-drawer{position:fixed;right:-430px;top:0;width:min(430px,100%);height:100vh;background:rgba(255,255,255,.95);backdrop-filter:blur(22px);z-index:2000;box-shadow:-20px 0 60px rgba(60,45,80,.15);transition:.4s;padding:24px;display:flex;flex-direction:column}
+    .cart-drawer.open{right:0}
+    .cart-overlay{position:fixed;inset:0;background:rgba(40,30,50,.25);z-index:1990;opacity:0;pointer-events:none;transition:.3s}
+    .cart-overlay.show{opacity:1;pointer-events:auto}
+    .cart-items{flex:1;overflow:auto;padding-right:4px}
+    .cart-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:center}
+    .cart-item img{width:68px;height:68px;object-fit:cover;border-radius:13px}
+    .cart-item h6{font-size:.88rem;font-weight:800;margin:0}
+    .cart-total{border-top:1px solid var(--line);padding-top:18px}
+    .cart-fab{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border:0;border-radius:18px;background:var(--primary);color:#fff;z-index:1500;box-shadow:0 16px 35px rgba(87,64,112,.30);animation:cartPulse 2.5s infinite;cursor:pointer}
+    .cart-count{position:absolute;right:-5px;top:-7px;background:#4d405f;color:#fff;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;font-size:.7rem;font-weight:800}
+    .toast-container{z-index:3000}
+    .toast{border:0;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .footer{background:#2e2738;color:#e8e1ef;margin-top:80px}
+    .footer a{color:#c7bdcf;display:block;margin:9px 0;font-size:.9rem}.footer a:hover{color:#fff}
+    .footer p{color:#bdb2c7;line-height:1.7}
+    .social{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.08);display:grid!important;place-items:center;color:#fff!important;margin:0!important}
+    .accordion-item{border:1px solid var(--line)!important;border-radius:14px!important;overflow:hidden;margin-bottom:10px}
+    .accordion-button{font-weight:700}.accordion-button:not(.collapsed){background:var(--lav);color:var(--primary);box-shadow:none}
+    .location-map{min-height:300px;border-radius:22px;background:linear-gradient(135deg,#e9e1f2,#dcd6cd);display:grid;place-items:center;position:relative;overflow:hidden}
+    .map-pin{width:62px;height:62px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--primary);display:grid;place-items:center;color:#fff;box-shadow:0 15px 30px rgba(138,118,166,.3)}
+    .map-pin i{transform:rotate(45deg)}
+    .counter{font-size:2.4rem;font-weight:800;color:var(--primary)}
+    .empty-state{text-align:center;padding:55px 20px;color:var(--muted)}
+    .table-cart img{width:64px;height:64px;object-fit:cover;border-radius:12px}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes cartPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @media(max-width:991px){.search-wrap{min-width:0}.hero{min-height:auto;padding:55px 0}.hero-art{min-height:400px}.navbar-collapse{padding:15px 0}}
+    @media(max-width:575px){.section-pad{padding:65px 0}.hero h1{letter-spacing:-2px}.hero-art{min-height:320px}.float-card{font-size:.78rem}.auth-card{margin:35px auto;padding:23px}}
+  </style>
+</head>
+
+<body>
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-xl">
+    <div class="container py-2">
+      <a class="navbar-brand d-flex align-items-center gap-2 brand" data-page="home">
+        <span class="brand-mark"><i class="bi bi-cpu"></i></span> PurpleTech
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><i class="bi bi-list fs-3"></i></button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <div class="mx-xl-auto my-3 my-xl-0 search-wrap">
+          <i class="bi bi-search"></i>
+          <input id="globalSearch" class="form-control" type="search" placeholder="Search gadgets..." aria-label="Search products">
+        </div>
+        <ul class="navbar-nav align-items-xl-center gap-xl-1">
+          <li class="nav-item"><a class="nav-link active" data-page="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="products">Products</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="add-product">Add Product</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="about">About</a></li>
+          <li class="nav-item"><a class="nav-link" data-page="contact">Contact</a></li>
+          <li class="nav-item ms-xl-2"><a class="btn btn-soft btn-sm" data-page="login">Login</a></li>
+          <li class="nav-item"><a class="btn btn-purple btn-sm" data-page="register">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="container position-relative">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+              <span class="eyebrow"><i class="bi bi-stars"></i> Future-ready technology</span>
+              <h1>Technology that feels <span>beautiful.</span></h1>
+              <p class="hero-copy">Discover thoughtfully selected electronics and smart gadgets wrapped in a calm, modern shopping experience.</p>
+              <div class="d-flex flex-wrap gap-3 mt-4">
+                <button class="btn btn-purple" data-page="products">Explore Products <i class="bi bi-arrow-right ms-1"></i></button>
+                <button class="btn btn-soft" data-page="about">Our Story</button>
+              </div>
+              <div class="d-flex flex-wrap gap-4 mt-5 small text-secondary">
+                <span><i class="bi bi-check-circle-fill text-purple me-1"></i> Secure checkout</span>
+                <span><i class="bi bi-check-circle-fill text-purple me-1"></i> 2-year warranty</span>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="hero-art">
+                <img class="hero-device" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85" alt="Modern smartwatch" onerror="this.src='https://placehold.co/800x800/e8e1f1/6f5b8c?text=Smart+Tech'">
+                <div class="float-card float-one"><strong><i class="bi bi-lightning-charge-fill text-purple"></i> Fast delivery</strong><br><small class="text-secondary">Worldwide</small></div>
+                <div class="float-card float-two"><strong>4.9/5 ★</strong><br><small class="text-secondary">Loved by tech fans</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container section-pad pt-3">
+        <div class="section-title">
+          <span class="eyebrow">Shop smarter</span>
+          <h2 class="mt-3">Find your next favorite gadget.</h2>
+          <p>Search the catalog instantly or browse by category.</p>
+        </div>
+        <div class="glass filter-bar">
+          <div class="d-flex flex-wrap gap-2" id="homeFilters"></div>
+        </div>
+        <div class="row g-4" id="homeProductGrid"></div>
+      </div>
+
+      <div class="container section-pad pt-0">
+        <div class="section-title">
+          <span class="eyebrow">Why PurpleTech</span>
+          <h2 class="mt-3">A calmer way to shop tech.</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4"><div class="glass feature-card"><div class="feature-icon"><i class="bi bi-truck"></i></div><h5>Express Delivery</h5><p>Fast, carefully packed delivery designed to get your new tech to you with less waiting.</p></div></div>
+          <div class="col-md-4"><div class="glass feature-card"><div class="feature-icon"><i class="bi bi-shield-check"></i></div><h5>2-Year Warranty</h5><p>Extra confidence with warranty coverage on eligible products and responsive support.</p></div></div>
+          <div class="col-md-4"><div class="glass feature-card"><div class="feature-icon"><i class="bi bi-headset"></i></div><h5>24/7 Tech Support</h5><p>Helpful guidance whenever you need a hand choosing, setting up, or using your devices.</p></div></div>
+        </div>
+      </div>
+
+      <div class="container section-pad pt-0">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div class="section-title mb-0"><span class="eyebrow">Tech Journal</span><h2 class="mt-3 mb-0">Fresh from the lab.</h2></div>
+          <button class="btn btn-soft d-none d-md-inline-block" data-page="about">Read more</button>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4"><article class="blog-card"><img class="blog-img" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80" alt="Smartphone technology" onerror="this.src='https://placehold.co/900x500/e8e1f1/6f5b8c?text=Tech+News'"><div class="blog-body"><small class="text-purple fw-bold">GUIDE · 5 MIN</small><h5 class="mt-2">How to build a smarter everyday setup</h5><p class="mb-0">Simple upgrades that make work, entertainment, and home life feel more seamless.</p></div></article></div>
+          <div class="col-md-4"><article class="blog-card"><img class="blog-img" src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=80" alt="Wireless earbuds" onerror="this.src='https://placehold.co/900x500/e8e1f1/6f5b8c?text=Audio'"><div class="blog-body"><small class="text-purple fw-bold">AUDIO · 4 MIN</small><h5 class="mt-2">What makes wireless audio feel premium?</h5><p class="mb-0">A practical look at comfort, codecs, battery life, and everyday listening.</p></div></article></div>
+          <div class="col-md-4"><article class="blog-card"><img class="blog-img" src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=900&q=80" alt="VR headset" onerror="this.src='https://placehold.co/900x500/e8e1f1/6f5b8c?text=VR'"><div class="blog-body"><small class="text-purple fw-bold">FUTURE · 6 MIN</small><h5 class="mt-2">The next chapter of immersive gadgets</h5><p class="mb-0">From spatial computing to lighter wearable experiences, the future is getting closer.</p></div></article></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="page" id="page-products">
+      <div class="container page-hero">
+        <div class="section-title">
+          <span class="eyebrow">Catalog</span>
+          <h1 class="mt-3">All products.</h1>
+          <p>Explore the complete collection. Your search and category filters update the catalog instantly.</p>
+        </div>
+        <div class="glass filter-bar">
+          <div class="row g-3 align-items-center">
+            <div class="col-lg-8"><div class="d-flex flex-wrap gap-2" id="catalogFilters"></div></div>
+            <div class="col-lg-4">
+              <select class="form-select" id="sortProducts">
+                <option value="featured">Sort: Featured</option>
+                <option value="price-low">Price: Low to high</option>
+                <option value="price-high">Price: High to low</option>
+                <option value="rating">Rating</option>
+                <option value="name">Name A–Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <!-- ADD PRODUCT -->
+    <section class="page" id="page-add-product">
+      <div class="container page-hero">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="glass p-4 p-md-5 rounded-4">
+              <span class="eyebrow">Seller tools</span>
+              <h1 class="mt-3">Add a product.</h1>
+              <p class="text-secondary">Add a product to this browser's local catalog. External image URLs are displayed safely inside a fixed frame.</p>
+              <form id="addProductForm" class="row g-3 mt-2">
+                <div class="col-12"><label class="form-label fw-semibold">Product title</label><input id="newTitle" class="form-control" required maxlength="80" placeholder="e.g. Nova Smart Ring"></div>
+                <div class="col-md-6"><label class="form-label fw-semibold">Category</label><select id="newCategory" class="form-select" required><option>Smartphones</option><option>Audio</option><option>Smart Home</option><option>Laptops</option><option>Wearables</option></select></div>
+                <div class="col-md-6"><label class="form-label fw-semibold">Price ($)</label><input id="newPrice" type="number" min="1" step="1" class="form-control" required placeholder="299"></div>
+                <div class="col-12"><label class="form-label fw-semibold">External image URL</label><input id="newImage" type="url" class="form-control" required placeholder="https://images.unsplash.com/..."></div>
+                <div class="col-12">
+                  <div class="p-3 rounded-4" style="background:var(--lav)">
+                    <div class="d-flex gap-2"><i class="bi bi-shield-check text-purple"></i><small class="text-secondary">The URL is validated as HTTP/HTTPS and is rendered only as an image source. Broken URLs automatically use a placeholder.</small></div>
+                  </div>
+                </div>
+                <div class="col-12 d-flex gap-2 mt-2"><button class="btn btn-purple" type="submit">Add Product</button><button class="btn btn-soft" type="reset">Clear</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <section class="page" id="page-cart">
+      <div class="container page-hero">
+        <div class="section-title"><span class="eyebrow">Checkout preview</span><h1 class="mt-3">Your shopping cart.</h1><p>Review your items, apply a promo code, and preview your checkout total.</p></div>
+        <div class="row g-4">
+          <div class="col-lg-8"><div class="glass p-3 p-md-4 rounded-4" id="cartPageItems"></div></div>
+          <div class="col-lg-4">
+            <div class="glass p-4 rounded-4">
+              <h5 class="fw-bold">Order summary</h5>
+              <div class="d-flex justify-content-between mt-4"><span class="text-secondary">Subtotal</span><strong id="cartSubtotal">$0</strong></div>
+              <div class="d-flex justify-content-between mt-3"><span class="text-secondary">Delivery</span><strong id="deliveryCost">$0</strong></div>
+              <hr>
+              <div class="d-flex justify-content-between"><span class="fw-bold">Total</span><strong class="fs-4 text-purple" id="cartTotal">$0</strong></div>
+              <div class="input-group mt-4"><input id="promoInput" class="form-control" placeholder="Promo code (e.g. PURPLE10)"><button class="btn btn-soft" id="applyPromo">Apply</button></div>
+              <small id="promoMessage" class="d-block mt-2 text-secondary"></small>
+              <button class="btn btn-purple w-100 mt-4" id="checkoutBtn">Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="page" id="page-login">
+      <div class="container"><div class="auth-card glass">
+        <div class="text-center mb-4"><span class="brand-mark"><i class="bi bi-person"></i></span><h2 class="mt-3 fw-bold">Welcome back</h2><p class="text-secondary">Sign in to your PurpleTech account.</p></div>
+        <form id="loginForm">
+          <label class="form-label fw-semibold">Email</label><input class="form-control mb-3" type="email" required placeholder="you@example.com">
+          <label class="form-label fw-semibold">Password</label><input class="form-control mb-3" type="password" required placeholder="••••••••">
+          <div class="d-flex justify-content-between align-items-center mb-4"><label class="small"><input class="form-check-input me-2" type="checkbox">Remember me</label><a href="#" class="text-purple small fw-bold">Forgot password?</a></div>
+          <button class="btn btn-purple w-100" type="submit">Login</button>
+        </form>
+        <div class="text-center my-4 text-secondary small">or continue with</div>
+        <div class="d-flex gap-2"><button class="btn btn-soft flex-fill"><i class="bi bi-google me-1"></i> Google</button><button class="btn btn-soft flex-fill"><i class="bi bi-apple me-1"></i> Apple</button></div>
+        <p class="text-center mt-4 mb-0 small text-secondary">New here? <a data-page="register" class="text-purple fw-bold">Create an account</a></p>
+      </div></div>
+    </section>
+
+    <!-- REGISTER -->
+    <section class="page" id="page-register">
+      <div class="container"><div class="auth-card glass">
+        <div class="text-center mb-4"><span class="brand-mark"><i class="bi bi-stars"></i></span><h2 class="mt-3 fw-bold">Create your account</h2><p class="text-secondary">Join the PurpleTech community.</p></div>
+        <form id="registerForm">
+          <div class="row g-3"><div class="col-md-6"><label class="form-label fw-semibold">First name</label><input class="form-control" required></div><div class="col-md-6"><label class="form-label fw-semibold">Last name</label><input class="form-control" required></div></div>
+          <label class="form-label fw-semibold mt-3">Email</label><input type="email" class="form-control" required>
+          <label class="form-label fw-semibold mt-3">Password</label><input id="registerPassword" type="password" class="form-control" required>
+          <div class="strength mt-2"><span id="strengthBar"></span></div><small id="strengthText" class="text-secondary">Password strength</small>
+          <label class="form-label fw-semibold mt-3">Confirm password</label><input id="confirmPassword" type="password" class="form-control" required>
+          <label class="small mt-3 d-block"><input class="form-check-input me-2" type="checkbox" required> I agree to the terms and privacy policy.</label>
+          <button class="btn btn-purple w-100 mt-4" type="submit">Create Account</button>
+        </form>
+        <p class="text-center mt-4 mb-0 small text-secondary">Already registered? <a data-page="login" class="text-purple fw-bold">Login</a></p>
+      </div></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page" id="page-about">
+      <div class="container page-hero">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6"><span class="eyebrow">Our story</span><h1 class="mt-3">Tech can be powerful and peaceful.</h1><p class="lead text-secondary">PurpleTech was imagined as a modern electronics destination where thoughtful design, useful technology, and a calm customer experience meet.</p><p class="text-secondary">Our mission is simple: make it easier to discover reliable gadgets without the noise. We curate products around real-life use, clear information, and long-term value.</p></div>
+          <div class="col-lg-6"><img class="w-100 rounded-5 shadow" style="aspect-ratio:4/3;object-fit:cover" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=85" alt="Technology workspace" onerror="this.src='https://placehold.co/1000x750/e8e1f1/6f5b8c?text=PurpleTech'"></div>
+        </div>
+        <div class="row g-4 mt-5">
+          <div class="col-md-4"><div class="glass stat-card text-center"><div class="counter">25,000+</div><p class="mb-0">Happy Customers</p></div></div>
+          <div class="col-md-4"><div class="glass stat-card text-center"><div class="counter">120,000+</div><p class="mb-0">Products Delivered</p></div></div>
+          <div class="col-md-4"><div class="glass stat-card text-center"><div class="counter">98%</div><p class="mb-0">Support Satisfaction</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="page-contact">
+      <div class="container page-hero">
+        <div class="section-title"><span class="eyebrow">Get in touch</span><h1 class="mt-3">We'd love to hear from you.</h1><p>Questions about an order, a product, or your next setup? Send us a message.</p></div>
+        <div class="row g-4">
+          <div class="col-lg-7"><div class="glass p-4 p-md-5 rounded-4"><form id="contactForm" class="row g-3"><div class="col-md-6"><label class="form-label fw-semibold">Name</label><input class="form-control" required></div><div class="col-md-6"><label class="form-label fw-semibold">Email</label><input class="form-control" type="email" required></div><div class="col-12"><label class="form-label fw-semibold">Subject</label><input class="form-control" required></div><div class="col-12"><label class="form-label fw-semibold">Message</label><textarea class="form-control" rows="6" required></textarea></div><div class="col-12"><button class="btn btn-purple" type="submit">Send Message <i class="bi bi-send ms-1"></i></button></div></form></div></div>
+          <div class="col-lg-5"><div class="location-map shadow-sm"><div class="map-pin"><i class="bi bi-geo-alt-fill"></i></div><div class="position-absolute bottom-0 start-0 p-4"><div class="glass px-3 py-2 rounded-4"><strong>Tech Support Center</strong><br><small class="text-secondary">Online support 24/7</small></div></div></div><div class="row g-3 mt-1"><div class="col-6"><div class="glass info-card"><i class="bi bi-envelope text-purple fs-4"></i><h6 class="mt-3">Email</h6><p class="mb-0 small">hello@purpletech.demo</p></div></div><div class="col-6"><div class="glass info-card"><i class="bi bi-telephone text-purple fs-4"></i><h6 class="mt-3">Phone</h6><p class="mb-0 small">+1 (800) 555-0199</p></div></div></div></div>
+        </div>
+        <div class="mt-5"><h3 class="fw-bold mb-3">Frequently asked questions</h3><div class="accordion" id="faq">
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">How long does delivery take?</button></h2><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faq"><div class="accordion-body text-secondary">Delivery timing depends on destination and product availability. Standard express delivery usually takes 2–4 business days.</div></div></div>
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">Can I add my own product?</button></h2><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-secondary">Yes. Use Add Product to create a local catalog item with a title, category, price, and HTTPS image URL.</div></div></div>
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">Does this demo process real payments?</button></h2><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body text-secondary">No. The checkout is a front-end preview only. A real store would connect it to a secure backend and payment provider.</div></div></div>
+        </div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CART FAB & DRAWER -->
+  <button class="cart-fab" id="cartFab" aria-label="Open cart"><i class="bi bi-bag fs-5"></i><span class="cart-count" id="cartCount">0</span></button>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="d-flex align-items-center justify-content-between mb-3"><div><small class="text-purple fw-bold">YOUR BAG</small><h4 class="fw-bold mb-0">Shopping Cart</h4></div><button class="btn btn-soft p-2" id="closeCart"><i class="bi bi-x-lg"></i></button></div>
+    <div class="cart-items" id="drawerItems"></div>
+    <div class="cart-total">
+      <div class="d-flex justify-content-between"><span class="text-secondary">Subtotal</span><strong id="drawerSubtotal">$0</strong></div>
+      <button class="btn btn-purple w-100 mt-3" data-page="cart">View Cart & Checkout</button>
+    </div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="brand d-flex align-items-center gap-2 text-white fs-5"><span class="brand-mark"><i class="bi bi-cpu"></i></span> PurpleTech</div>
+          <p class="mt-3">Modern gadgets, thoughtful design, and a smoother way to shop technology.</p>
+          <div class="d-flex gap-2 mt-3"><a class="social"><i class="bi bi-instagram"></i></a><a class="social"><i class="bi bi-facebook"></i></a><a class="social"><i class="bi bi-twitter-x"></i></a><a class="social"><i class="bi bi-youtube"></i></a></div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-white fw-bold">Explore</h6>
+          <a data-page="home">Home</a><a data-page="products">Products</a><a data-page="add-product">Add Item</a>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-white fw-bold">Company</h6>
+          <a data-page="about">About Us</a><a data-page="contact">Contact</a><a data-page="login">Account</a>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-white fw-bold">Stay Updated</h6>
+          <p class="small">Subscribe for the latest tech drops and exclusive offers.</p>
+          <div class="input-group">
+            <input class="form-control border-0" placeholder="Enter your email">
+            <button class="btn btn-purple">Join</button>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4" style="border-color: rgba(255,255,255,.1)">
+      <div class="text-center small text-secondary">© 2026 PurpleTech Store. Built with soft pastel vibes & modern JS.</div>
+    </div>
+  </footer>
+
+  <!-- BOOTSTRAP BUNDLE JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- APP SCRIPT -->
+  <script>
+    // INITIAL DATA
+    const categories = ["All", "Smartphones", "Audio", "Smart Home", "Laptops", "Wearables"];
+    let products = [
+      { id: 1, title: "Aura Noise-Canceling Headphones", category: "Audio", price: 299, rating: 4.9, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" },
+      { id: 2, title: "Zenith Pro Smartphone", category: "Smartphones", price: 899, rating: 4.8, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" },
+      { id: 3, title: "Pulse Ultra Smartwatch", category: "Wearables", price: 249, rating: 4.7, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" },
+      { id: 4, title: "Lumina AI Smart Speaker", category: "Smart Home", price: 129, rating: 4.6, image: "https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&w=800&q=80" },
+      { id: 5, title: "AirGlide Ultra Laptop", category: "Laptops", price: 1299, rating: 4.9, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" },
+      { id: 6, title: "SonicPod Wireless Earbuds", category: "Audio", price: 159, rating: 4.8, image: "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=80" }
+    ];
+
+    let cart = [];
+    let currentCategory = "All";
+    let searchQuery = "";
+    let appliedDiscount = 0;
+
+    // DOM ELEMENTS
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('[data-page]');
+    const cartFab = document.getElementById('cartFab');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const closeCart = document.getElementById('closeCart');
+    const globalSearch = document.getElementById('globalSearch');
+
+    // SPA NAVIGATION
+    function navigateTo(pageId) {
+      pages.forEach(p => p.classList.remove('active'));
+      const targetPage = document.getElementById(`page-${pageId}`);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.page === pageId);
+      });
+
+      if (cartDrawer.classList.contains('open')) toggleCart(false);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        if (page) navigateTo(page);
+      });
+    });
+
+    // CART DRAWER TOGGLE
+    function toggleCart(show) {
+      cartDrawer.classList.toggle('open', show);
+      cartOverlay.classList.toggle('show', show);
+    }
+    cartFab.addEventListener('click', () => toggleCart(true));
+    closeCart.addEventListener('click', () => toggleCart(false));
+    cartOverlay.addEventListener('click', () => toggleCart(false));
+
+    // TOAST NOTIFICATIONS
+    function showToast(msg, type = 'purple') {
+      const toastContainer = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast align-items-center text-white bg-${type === 'purple' ? 'primary' : 'dark'} show mb-2`;
+      toast.style.background = 'var(--primary)';
+      toast.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body fw-semibold"><i class="bi bi-check-circle-fill me-2"></i> ${msg}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>`;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // RENDER CATEGORY FILTERS
+    function renderFilters(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = categories.map(cat => `
+        <button class="filter-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      renderFilters('homeFilters');
+      renderFilters('catalogFilters');
+      renderProducts();
+    }
+
+    // SEARCH LISTENER
+    globalSearch.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderProducts();
+    });
+
+    // SORT LISTENER
+    document.getElementById('sortProducts')?.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val === 'price-low') products.sort((a,b) => a.price - b.price);
+      else if (val === 'price-high') products.sort((a,b) => b.price - a.price);
+      else if (val === 'rating') products.sort((a,b) => b.rating - a.rating);
+      else if (val === 'name') products.sort((a,b) => a.title.localeCompare(b.title));
+      renderProducts();
+    });
+
+    // RENDER PRODUCTS GRID
+    function renderProducts() {
+      const filtered = products.filter(p => {
+        const matchesCat = currentCategory === "All" || p.category === currentCategory;
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      const createCard = (p) => `
+        <div class="col-sm-6 col-lg-4">
+          <div class="product-card">
+            <span class="badge-cat">${p.category}</span>
+            <div class="product-img-wrap">
+              <img class="product-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://placehold.co/600x450/e8e1f1/6f5b8c?text=Gadget'">
+            </div>
+            <div class="product-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="rating"><i class="bi bi-star-fill"></i> ${p.rating || 5.0}</span>
+                <span class="price">$${p.price}</span>
+              </div>
+              <h5 class="product-title">${p.title}</h5>
+              <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-purple btn-sm flex-fill" onclick="addToCart(${p.id})"><i class="bi bi-bag-plus me-1"></i> Add to Cart</button>
+                <button class="btn btn-soft btn-sm" onclick="deleteProduct(${p.id})" title="Delete"><i class="bi bi-trash"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+      const homeGrid = document.getElementById('homeProductGrid');
+      const catalogGrid = document.getElementById('catalogGrid');
+
+      const content = filtered.length ? filtered.map(createCard).join('') : `<div class="empty-state w-100"><i class="bi bi-search fs-1"></i><p class="mt-2">No gadgets match your query.</p></div>`;
+
+      if (homeGrid) homeGrid.innerHTML = content;
+      if (catalogGrid) catalogGrid.innerHTML = content;
+    }
+
+    // ADD / DELETE PRODUCT
+    function deleteProduct(id) {
+      products = products.filter(p => p.id !== id);
+      cart = cart.filter(ci => ci.id !== id);
+      renderProducts();
+      updateCartUI();
+      showToast('Product removed from catalog.');
+    }
+
+    document.getElementById('addProductForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('newTitle').value;
+      const category = document.getElementById('newCategory').value;
+      const price = parseFloat(document.getElementById('newPrice').value);
+      const image = document.getElementById('newImage').value;
+
+      const newProd = { id: Date.now(), title, category, price, rating: 5.0, image };
+      products.unshift(newProd);
+      renderProducts();
+      e.target.reset();
+      showToast('Product added successfully!');
+      navigateTo('products');
+    });
+
+    // CART OPERATIONS
+    function addToCart(id) {
+      const item = products.find(p => p.id === id);
+      if (!item) return;
+      const existing = cart.find(c => c.id === id);
+      if (existing) existing.qty += 1;
+      else cart.push({ ...item, qty: 1 });
+
+      updateCartUI();
+      showToast(`Added "${item.title}" to cart.`);
+    }
+
+    function updateQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, c) => acc + c.qty, 0);
+      const subtotal = cart.reduce((acc, c) => acc + (c.price * c.qty), 0);
+      const delivery = subtotal > 0 ? 15 : 0;
+      const total = Math.max(0, subtotal + delivery - appliedDiscount);
+
+      document.getElementById('cartCount').textContent = totalCount;
+      document.getElementById('drawerSubtotal').textContent = `$${subtotal}`;
+      document.getElementById('cartSubtotal').textContent = `$${subtotal}`;
+      document.getElementById('deliveryCost').textContent = `$${delivery}`;
+      document.getElementById('cartTotal').textContent = `$${total}`;
+
+      // Render Drawer Items
+      const drawerItems = document.getElementById('drawerItems');
+      if (cart.length === 0) {
+        drawerItems.innerHTML = `<div class="empty-state"><i class="bi bi-bag-x fs-1"></i><p class="mt-2">Your cart is empty.</p></div>`;
+      } else {
+        drawerItems.innerHTML = cart.map(c => `
+          <div class="cart-item">
+            <img src="${c.image}" alt="${c.title}" onerror="this.src='https://placehold.co/200x200/e8e1f1/6f5b8c?text=Item'">
+            <div class="flex-fill">
+              <h6>${c.title}</h6>
+              <small class="text-purple fw-bold">$${c.price}</small>
+              <div class="d-flex align-items-center gap-2 mt-1">
+                <button class="btn btn-soft btn-sm p-0 px-2" onclick="updateQty(${c.id}, -1)">-</button>
+                <span class="small fw-bold">${c.qty}</span>
+                <button class="btn btn-soft btn-sm p-0 px-2" onclick="updateQty(${c.id}, 1)">+</button>
+              </div>
+            </div>
+            <button class="btn text-danger btn-sm" onclick="updateQty(${c.id}, -${c.qty})"><i class="bi bi-x-lg"></i></button>
+          </div>`).join('');
+      }
+
+      // Render Cart Page Items
+      const cartPageItems = document.getElementById('cartPageItems');
+      if (cartPageItems) {
+        if (cart.length === 0) {
+          cartPageItems.innerHTML = `<div class="empty-state"><i class="bi bi-bag-x fs-1"></i><p class="mt-2">Your cart is empty.</p></div>`;
+        } else {
+          cartPageItems.innerHTML = `
+            <div class="table-responsive">
+              <table class="table align-middle table-cart">
+                <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th>Action</th></tr></thead>
+                <tbody>
+                  ${cart.map(c => `
+                    <tr>
+                      <td><div class="d-flex align-items-center gap-3"><img src="${c.image}" alt="${c.title}"><strong>${c.title}</strong></div></td>                       <td class="fw-bold">$${c.price}</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <button class="btn btn-soft btn-sm p-0 px-2" onclick="updateQty(${c.id}, -1)">-</button>
+                          <span>${c.qty}</span>
+                          <button class="btn btn-soft btn-sm p-0 px-2" onclick="updateQty(${c.id}, 1)">+</button>                         </div>                       </td>                       <td class="fw-bold text-purple">$${c.price * c.qty}</td>
+                      <td><button class="btn btn-sm btn-soft text-danger" onclick="updateQty(${c.id}, -${c.qty})"><i class="bi bi-trash"></i></button></td>
+                    </tr>`).join('')}
+                </tbody>
+              </table>
+            </div>`;
+        }
+      }
+    }
+
+    // PROMO CODE
+    document.getElementById('applyPromo')?.addEventListener('click', () => {
+      const code = document.getElementById('promoInput').value.trim().toUpperCase();
+      const msg = document.getElementById('promoMessage');
+      if (code === 'PURPLE10') {
+        appliedDiscount = 20;
+        msg.textContent = 'Promo code applied! $20 discount.';
+        msg.className = 'd-block mt-2 text-success fw-bold';
+      } else {
+        appliedDiscount = 0;
+        msg.textContent = 'Invalid promo code. Try PURPLE10.';
+        msg.className = 'd-block mt-2 text-danger fw-bold';
+      }
+      updateCartUI();
+    });
+
+    // CHECKOUT
+    document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+      if (cart.length === 0) {
+        showToast('Your cart is empty!');
+        return;
+      }
+      showToast('Order placed successfully! Thank you.');
+      cart = [];
+      appliedDiscount = 0;
+      updateCartUI();
+    });
+
+    // PASSWORD STRENGTH
+    document.getElementById('registerPassword')?.addEventListener('input', (e) => {
+      const val = e.target.value;
+      const bar = document.getElementById('strengthBar');
+      const text = document.getElementById('strengthText');
+      let score = 0;
+      if (val.length > 5) score += 33;
+      if (val.match(/[A-Z]/) && val.match(/[0-9]/)) score += 33;
+      if (val.length > 10 && val.match(/[^a-zA-Z0-9]/)) score += 34;
+
+      bar.style.width = score + '%';
+      if (score < 34) { text.textContent = 'Weak password'; text.className = 'text-danger small'; }
+      else if (score < 67) { text.textContent = 'Medium password'; text.className = 'text-warning small'; }
+      else { text.textContent = 'Strong password'; text.className = 'text-success small'; }
+    });
+
+    // INITIAL RENDER
+    renderFilters('homeFilters');
+    renderFilters('catalogFilters');
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
